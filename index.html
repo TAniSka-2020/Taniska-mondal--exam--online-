@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Class 1 English Online Exam</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      touch-action: manipulation;
+    }
+    .font-fun {
+      font-family: 'Fredoka', cursive, sans-serif;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 8px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #fbcfe8;
+      border-radius: 9999px;
+    }
+    @media print {
+      body {
+        background: white !important;
+        color: black !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-only {
+        display: block !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-amber-50 via-sky-50 to-pink-50 min-h-screen text-slate-800 antialiased p-3 sm:p-6 md:p-8">
+
+  <div class="max-w-4xl mx-auto">
+    <!-- Top Header Card -->
+    <header class="bg-white rounded-3xl shadow-xl border-4 border-amber-300 p-4 sm:p-6 mb-6 relative overflow-hidden">
+      <div class="absolute -top-6 -right-6 w-24 h-24 bg-yellow-200 rounded-full opacity-60 pointer-events-none"></div>
+      <div class="absolute -bottom-8 -left-8 w-28 h-28 bg-sky-200 rounded-full opacity-50 pointer-events-none"></div>
+
+      <div class="relative z-10">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b-2 border-dashed border-amber-200 pb-4">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-xs sm:text-sm font-bold tracking-wide mb-1">
+              <span>🌟 Primary Section 2026</span>
+              <span>•</span>
+              <span>1-Hour Online Assessment</span>
+            </div>
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-black text-indigo-900 font-fun tracking-wide">
+              🎈 Class 1 English Exam
+            </h1>
+            <p class="text-sm sm:text-base text-slate-600 font-medium">Read carefully, tap or choose the answers, and have fun!</p>
+          </div>
+
+          <!-- Timer Badge -->
+          <div class="flex flex-row md:flex-col items-center justify-between md:items-end gap-2 bg-indigo-50 border-2 border-indigo-200 rounded-2xl p-3 px-4 shadow-sm">
+            <div class="text-xs font-bold text-indigo-700 uppercase tracking-wider flex items-center gap-1">
+              <span>⏳ Time Left</span>
+            </div>
+            <div id="timerDisplay" class="text-2xl sm:text-3xl font-black text-rose-600 font-fun tracking-wider">
+              60:00
+            </div>
+            <div class="flex items-center gap-1.5 no-print">
+              <button id="timerToggleBtn" onclick="toggleTimer()" class="px-2.5 py-1 text-xs font-bold bg-white border border-indigo-300 hover:bg-indigo-100 rounded-lg text-indigo-800 transition">
+                Pause
+              </button>
+              <button onclick="resetTimer()" class="px-2.5 py-1 text-xs font-bold bg-white border border-slate-300 hover:bg-slate-100 rounded-lg text-slate-700 transition">
+                Reset
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Student Meta Information Form -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4">
+          <div class="bg-amber-50/70 border border-amber-200 rounded-xl p-2.5">
+            <label class="block text-xs font-bold text-amber-900 mb-1" for="studentName">Student Name 👧👦</label>
+            <input id="studentName" type="text" placeholder="Type child's name..." class="w-full bg-white border border-amber-300 rounded-lg px-3 py-1.5 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-amber-400">
+          </div>
+          <div class="bg-sky-50/70 border border-sky-200 rounded-xl p-2.5">
+            <label class="block text-xs font-bold text-sky-900 mb-1" for="examDate">Exam Date 📅</label>
+            <input id="examDate" type="date" class="w-full bg-white border border-sky-300 rounded-lg px-3 py-1.5 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-sky-400">
+          </div>
+          <div class="bg-emerald-50/70 border border-emerald-200 rounded-xl p-2.5 flex items-center justify-around">
+            <div class="text-center">
+              <span class="block text-[11px] font-bold text-emerald-800 uppercase">Total Marks</span>
+              <span class="text-lg font-black text-emerald-700 font-fun">40 Pts</span>
+            </div>
+            <div class="w-px h-8 bg-emerald-200"></div>
+            <div class="text-center">
+              <span class="block text-[11px] font-bold text-emerald-800 uppercase">Questions</span>
+              <span class="text-lg font-black text-emerald-700 font-fun">20 Qs</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="sticky top-2 z-30 mb-6 no-print">
+      <div class="bg-white/95 backdrop-blur-md rounded-2xl shadow-lg border-2 border-indigo-200 p-3 sm:p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div class="w-full sm:w-1/2">
+          <div class="flex justify-between items-center text-xs font-bold text-slate-700 mb-1">
+            <span>Exam Progress</span>
+            <span id="progressText" class="text-indigo-600">0 / 20 Answered</span>
+          </div>
+          <div class="w-full bg-slate-100 rounded-full h-3.5 overflow-hidden border border-slate-200">
+            <div id="progressBar" class="bg-gradient-to-r from-amber-400 via-pink-500 to-indigo-600 h-full rounded-full transition-all duration-300 w-0"></div>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+          <button onclick="speakText('Welcome to your Class One English exam. Click the yellow sound icon on any question to hear me read it aloud!')" class="flex items-center justify-center gap-1.5 px-3 py-2 bg-yellow-400 hover:bg-yellow-300 active:scale-95 text-yellow-950 font-bold rounded-xl text-xs sm:text-sm shadow-sm transition">
+            <span>🔊</span>
+            <span>Audio Help</span>
+          </button>
+          <button onclick="scrollToQuestion(1)" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-700 font-bold rounded-xl text-xs sm:text-sm transition">
+            Top ⬆️
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-10">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="bg-indigo-600 text-white font-fun font-bold text-lg sm:text-xl px-4 py-1 rounded-2xl shadow-md">Part A</span>
+        <h2 class="text-xl sm:text-2xl font-black text-indigo-900 font-fun">Choose the Correct Answer (10 Questions • 2 Marks Each)</h2>
+      </div>
+
+      <div class="space-y-4" id="partAQuestions">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <div class="mb-10">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="bg-pink-600 text-white font-fun font-bold text-lg sm:text-xl px-4 py-1 rounded-2xl shadow-md">Part B</span>
+        <h2 class="text-xl sm:text-2xl font-black text-pink-900 font-fun">Fill in the Blanks (10 Questions • 2 Marks Each)</h2>
+      </div>
+
+      <div class="space-y-4" id="partBQuestions">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <div class="bg-white rounded-3xl border-4 border-indigo-300 shadow-2xl p-6 text-center no-print mb-12">
+      <h3 class="text-2xl font-black text-indigo-950 font-fun mb-2">Done Answering All Questions? 🚀</h3>
+      <p class="text-slate-600 text-sm sm:text-base max-w-lg mx-auto mb-5">
+        Double check your name, make sure you answered every question, and press Submit to get your stars and final score!
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <button id="submitBtn" onclick="submitExam()" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-fun text-xl font-bold rounded-2xl shadow-lg active:scale-95 transition-transform flex items-center justify-center gap-2">
+          <span>✅</span>
+          <span>Submit My Exam</span>
+        </button>
+        <button onclick="clearAllAnswers()" class="w-full sm:w-auto px-6 py-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-2xl transition active:scale-95">
+          Clear All Answers 🔄
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="resultModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 hidden">
+    <div class="bg-white rounded-3xl shadow-2xl border-4 border-indigo-400 w-full max-w-2xl max-h-[90vh] overflow-y-auto custom-scroll p-5 sm:p-8 relative">
+      <button onclick="closeModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center text-xl font-bold no-print">
+        ✕
+      </button>
+
+      <div class="text-center pb-4 border-b border-slate-200">
+        <div id="celebrationBadge" class="text-5xl sm:text-6xl mb-2 animate-bounce">🏆</div>
+        <h2 id="resultHeading" class="text-2xl sm:text-3xl font-black text-indigo-900 font-fun">Awesome Effort!</h2>
+        <p id="studentGreeting" class="text-slate-600 font-semibold text-base mt-1"></p>
+
+        <!-- Big Score Display -->
+        <div class="inline-flex items-center gap-4 bg-gradient-to-r from-indigo-50 to-pink-50 border-2 border-indigo-200 rounded-3xl px-6 py-3 my-4">
+          <div>
+            <span class="block text-xs font-bold text-slate-500 uppercase">Score</span>
+            <span id="finalScoreText" class="text-3xl sm:text-4xl font-black text-indigo-700 font-fun">0 / 40</span>
+          </div>
+          <div class="w-px h-10 bg-indigo-200"></div>
+          <div>
+            <span class="block text-xs font-bold text-slate-500 uppercase">Percentage</span>
+            <span id="finalPercentageText" class="text-3xl sm:text-4xl font-black text-pink-600 font-fun">0%</span>
+          </div>
+        </div>
+        <div id="starsContainer" class="text-3xl tracking-widest text-amber-400 mb-2">⭐⭐⭐</div>
+        <p id="feedbackQuote" class="text-sm font-semibold text-slate-700 italic"></p>
+      </div>
+
+      <!-- Detailed Review Summary -->
+      <div class="py-4">
+        <h4 class="font-bold text-slate-800 text-base mb-3 flex items-center gap-2">
+          <span>📝</span>
+          <span>Question-by-Question Review</span>
+        </h4>
+        <div id="reviewBreakdown" class="space-y-3">
+          <!-- Filled by JS -->
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="pt-4 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-end gap-3 no-print">
+        <button onclick="window.print()" class="w-full sm:w-auto px-5 py-2.5 bg-indigo-100 hover:bg-indigo-200 text-indigo-900 font-bold rounded-xl flex items-center justify-center gap-2 transition">
+          <span>🖨️</span>
+          <span>Print Report Card</span>
+        </button>
+        <button onclick="closeModal()" class="w-full sm:w-auto px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition">
+          Back to Exam
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const partAData = [
+      {
+        id: 1,
+        type: 'mcq',
+        category: 'Comprehension',
+        context: 'The green tree gives us shade on a hot day.',
+        question: 'What does the tree give us?',
+        options: ['Shade', 'Milk', 'Fish', 'Ice'],
+        correct: 'Shade',
+        hint: 'Look for what keeps you cool when the sun is hot.'
+      },
+      {
+        id: 2,
+        type: 'mcq',
+        category: 'Rhyming Words',
+        context: '',
+        question: 'Which word rhymes with "cat"?',
+        options: ['Dog', 'Hat', 'Sun', 'Cup'],
+        correct: 'Hat',
+        hint: 'Both end with the sound "-at".'
+      },
+      {
+        id: 3,
+        type: 'mcq',
+        category: 'Sight Words',
+        context: '',
+        question: 'Sam likes to ______ with his toy car.',
+        options: ['play', 'jump', 'swim', 'fly'],
+        correct: 'play',
+        hint: 'Children love to play with toys.'
+      },
+      {
+        id: 4,
+        type: 'mcq',
+        category: 'Object Riddle',
+        context: '',
+        question: 'Which object has two hands, twelve numbers, and tells the time?',
+        options: ['A tree', 'A clock', 'A book', 'A pen'],
+        correct: 'A clock',
+        hint: 'It goes tick-tock on the wall.'
+      },
+      {
+        id: 5,
+        type: 'mcq',
+        category: 'Opposites',
+        context: '',
+        question: 'What is the opposite of the word "hot"?',
+        options: ['Wet', 'Cold', 'Red', 'Tall'],
+        correct: 'Cold',
+        hint: 'Ice cream and snow are very cold.'
+      },
+      {
+        id: 6,
+        type: 'mcq',
+        category: 'Grammar: Articles',
+        context: '',
+        question: 'I saw ______ big elephant in the zoo.',
+        options: ['a', 'an', 'the', 'on'],
+        correct: 'a',
+        hint: 'The word "big" starts with a consonant sound "b".'
+      },
+      {
+        id: 7,
+        type: 'mcq',
+        category: 'Action Words (Verbs)',
+        context: '',
+        question: 'Which word is an action word (verb)?',
+        options: ['Table', 'Spoon', 'Jump', 'Red'],
+        correct: 'Jump',
+        hint: 'An action word is something your body can do.'
+      },
+      {
+        id: 8,
+        type: 'mcq',
+        category: 'Comprehension',
+        context: 'The little fish swims in the blue pond.',
+        question: 'Where does the little fish swim?',
+        options: ['In the sky', 'On the roof', 'In the pond', 'In the cave'],
+        correct: 'In the pond',
+        hint: 'Fish live and swim in clean water.'
+      },
+      {
+        id: 9,
+        type: 'mcq',
+        category: 'Sentence Writing',
+        context: '',
+        question: 'Which sentence has the right capital letter and full stop (.)?',
+        options: ['this is my ball', 'This is my ball.', 'This is my ball?', 'THIS IS MY BALL'],
+        correct: 'This is my ball.',
+        hint: 'Starts with capital T and ends with a dot.'
+      },
+      {
+        id: 10,
+        type: 'mcq',
+        category: 'Singular & Plural',
+        context: '',
+        question: 'What is the plural of "one apple"?',
+        options: ['Two apple', 'Two apples', 'Appling', 'An apple'],
+        correct: 'Two apples',
+        hint: 'When there is more than one, we add "s".'
+      }
+    ];
+
+    const partBData = [
+      {
+        id: 11,
+        type: 'blank',
+        sentencePrefix: 'The cow gives us fresh',
+        sentenceSuffix: '.',
+        options: ['milk', 'stone'],
+        correct: 'milk',
+        question: 'The cow gives us fresh ______.'
+      },
+      {
+        id: 12,
+        type: 'blank',
+        sentencePrefix: 'Birds make nests in the tall green',
+        sentenceSuffix: '.',
+        options: ['tree', 'river'],
+        correct: 'tree',
+        question: 'Birds make nests in the tall green ______.'
+      },
+      {
+        id: 13,
+        type: 'blank',
+        sentencePrefix: 'An apple a day keeps the',
+        sentenceSuffix: 'away.',
+        options: ['doctor', 'tiger'],
+        correct: 'doctor',
+        question: 'An apple a day keeps the ______ away.'
+      },
+      {
+        id: 14,
+        type: 'blank',
+        sentencePrefix: 'Water is clear and',
+        sentenceSuffix: '.',
+        options: ['cool', 'angry'],
+        correct: 'cool',
+        question: 'Water is clear and ______.'
+      },
+      {
+        id: 15,
+        type: 'blank',
+        sentencePrefix: 'The bright sun rises in the',
+        sentenceSuffix: '.',
+        options: ['morning', 'night'],
+        correct: 'morning',
+        question: 'The bright sun rises in the ______.'
+      },
+      {
+        id: 16,
+        type: 'blank',
+        sentencePrefix: 'A book gives us stories and',
+        sentenceSuffix: '.',
+        options: ['knowledge', 'soup'],
+        correct: 'knowledge',
+        question: 'A book gives us stories and ______.'
+      },
+      {
+        id: 17,
+        type: 'blank',
+        sentencePrefix: 'Buzz, buzz, goes the busy little',
+        sentenceSuffix: '.',
+        options: ['bee', 'cat'],
+        correct: 'bee',
+        question: 'Buzz, buzz, goes the busy little ______.'
+      },
+      {
+        id: 18,
+        type: 'blank',
+        sentencePrefix: 'The ball is',
+        sentenceSuffix: 'the table.',
+        options: ['on', 'under', 'in'],
+        correct: 'on',
+        question: 'The ball is ______ the table.'
+      },
+      {
+        id: 19,
+        type: 'blank',
+        sentencePrefix: 'The opposite of "big" is',
+        sentenceSuffix: '.',
+        options: ['small', 'hot'],
+        correct: 'small',
+        question: 'The opposite of "big" is ______.'
+      },
+      {
+        id: 20,
+        type: 'blank',
+        sentencePrefix: 'Twinkle, twinkle little',
+        sentenceSuffix: 'in the night sky.',
+        options: ['star', 'box'],
+        correct: 'star',
+        question: 'Twinkle, twinkle little ______ in the night sky.'
+      }
+    ];
+
+    let answers = {};
+    let totalQuestions = partAData.length + partBData.length;
+    let timerSeconds = 60 * 60; // 60 minutes
+    let timerInterval = null;
+    let isTimerRunning = false;
+
+    window.onload = function() {
+      // Set default date
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('examDate').value = today;
+
+      renderPartA();
+      renderPartB();
+      updateProgress();
+      startTimer();
+    };
+
+    function renderPartA() {
+      const container = document.getElementById('partAQuestions');
+      container.innerHTML = partAData.map(q => {
+        return `
+          <div id="q-card-${q.id}" class="bg-white rounded-3xl p-4 sm:p-6 shadow-sm border-2 border-slate-100 hover:border-indigo-200 transition-all">
+            <div class="flex items-start justify-between gap-3 mb-2">
+              <div class="flex items-center gap-2">
+                <span class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 font-black font-fun flex items-center justify-center text-sm">
+                  ${q.id}
+                </span>
+                <span class="text-xs font-bold uppercase tracking-wider text-indigo-500 bg-indigo-50 px-2.5 py-0.5 rounded-full">
+                  ${q.category}
+                </span>
+              </div>
+              <button onclick="readQuestion(${q.id}, 'A')" title="Listen to question" class="px-2.5 py-1 bg-amber-100 hover:bg-amber-200 active:scale-95 text-amber-900 rounded-xl text-xs font-bold flex items-center gap-1 transition">
+                <span>🔊</span>
+                <span class="hidden sm:inline">Listen</span>
+              </button>
+            </div>
+
+            ${q.context ? `<div class="p-3 bg-amber-50/70 border-l-4 border-amber-400 rounded-r-xl mb-3 text-slate-800 text-sm sm:text-base font-semibold">📖 "${q.context}"</div>` : ''}
+
+            <p class="text-base sm:text-lg font-bold text-slate-900 mb-4">${q.question}</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              ${q.options.map(opt => `
+                <button type="button" 
+                  id="opt-${q.id}-${cleanStr(opt)}"
+                  onclick="selectOption(${q.id}, '${escapeSingleQuote(opt)}')" 
+                  class="option-btn text-left px-4 py-3 rounded-2xl border-2 border-slate-200 hover:border-indigo-400 bg-slate-50 hover:bg-indigo-50 text-slate-800 font-bold text-sm sm:text-base transition-all flex items-center justify-between active:scale-[0.99]">
+                  <span>${opt}</span>
+                  <span class="indicator w-5 h-5 rounded-full border-2 border-slate-300 flex items-center justify-center text-xs"></span>
+                </button>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderPartB() {
+      const container = document.getElementById('partBQuestions');
+      container.innerHTML = partBData.map(q => {
+        return `
+          <div id="q-card-${q.id}" class="bg-white rounded-3xl p-4 sm:p-6 shadow-sm border-2 border-slate-100 hover:border-pink-200 transition-all">
+            <div class="flex items-start justify-between gap-3 mb-2">
+              <div class="flex items-center gap-2">
+                <span class="w-8 h-8 rounded-full bg-pink-100 text-pink-700 font-black font-fun flex items-center justify-center text-sm">
+                  ${q.id}
+                </span>
+                <span class="text-xs font-bold uppercase tracking-wider text-pink-500 bg-pink-50 px-2.5 py-0.5 rounded-full">
+                  Fill in the Blank
+                </span>
+              </div>
+              <button onclick="readQuestion(${q.id}, 'B')" title="Listen to question" class="px-2.5 py-1 bg-amber-100 hover:bg-amber-200 active:scale-95 text-amber-900 rounded-xl text-xs font-bold flex items-center gap-1 transition">
+                <span>🔊</span>
+                <span class="hidden sm:inline">Listen</span>
+              </button>
+            </div>
+
+            <div class="my-3 text-base sm:text-lg font-bold text-slate-900 flex flex-wrap items-center gap-2 leading-loose">
+              <span>${q.sentencePrefix}</span>
+              <span id="blank-slot-${q.id}" class="inline-block min-w-[100px] border-b-4 border-dashed border-pink-400 bg-pink-50/60 px-3 py-0.5 rounded-lg text-pink-700 font-black text-center">
+                ______
+              </span>
+              <span>${q.sentenceSuffix}</span>
+            </div>
+
+            <!-- Tap Word Choices Bank -->
+            <div class="mt-3 pt-3 border-t border-slate-100">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-2">Tap a word to fill the gap:</span>
+              <div class="flex flex-wrap items-center gap-2">
+                ${q.options.map(opt => `
+                  <button type="button" 
+                    id="blank-opt-${q.id}-${cleanStr(opt)}"
+                    onclick="selectBlank(${q.id}, '${escapeSingleQuote(opt)}')" 
+                    class="blank-btn px-4 py-2 rounded-xl border-2 border-slate-200 bg-slate-50 hover:bg-pink-100 hover:border-pink-400 text-slate-800 font-bold text-sm sm:text-base active:scale-95 transition">
+                    👉 ${opt}
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function selectOption(questionId, selectedValue) {
+      answers[questionId] = selectedValue;
+
+      // Update UI for question options
+      const card = document.getElementById(`q-card-${questionId}`);
+      const buttons = card.querySelectorAll('.option-btn');
+      buttons.forEach(btn => {
+        btn.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-600', 'shadow-md');
+        btn.classList.add('bg-slate-50', 'text-slate-800', 'border-slate-200');
+        const indicator = btn.querySelector('.indicator');
+        indicator.innerHTML = '';
+        indicator.classList.remove('border-white', 'bg-white', 'text-indigo-600');
+        indicator.classList.add('border-slate-300');
+      });
+
+      const selectedBtn = document.getElementById(`opt-${questionId}-${cleanStr(selectedValue)}`);
+      if (selectedBtn) {
+        selectedBtn.classList.remove('bg-slate-50', 'text-slate-800', 'border-slate-200');
+        selectedBtn.classList.add('bg-indigo-600', 'text-white', 'border-indigo-600', 'shadow-md');
+        const ind = selectedBtn.querySelector('.indicator');
+        ind.classList.remove('border-slate-300');
+        ind.classList.add('border-white', 'bg-white', 'text-indigo-600');
+        ind.innerHTML = '✓';
+      }
+
+      card.classList.remove('border-slate-100');
+      card.classList.add('border-indigo-300', 'bg-indigo-50/20');
+      updateProgress();
+    }
+
+    function selectBlank(questionId, selectedValue) {
+      answers[questionId] = selectedValue;
+
+      // Update slot text
+      const slot = document.getElementById(`blank-slot-${questionId}`);
+      if (slot) {
+        slot.innerText = selectedValue;
+        slot.classList.remove('border-dashed');
+        slot.classList.add('border-solid', 'border-pink-600', 'bg-pink-100');
+      }
+
+      // Update buttons style
+      const card = document.getElementById(`q-card-${questionId}`);
+      const buttons = card.querySelectorAll('.blank-btn');
+      buttons.forEach(b => {
+        b.classList.remove('bg-pink-600', 'text-white', 'border-pink-600');
+        b.classList.add('bg-slate-50', 'text-slate-800', 'border-slate-200');
+      });
+
+      const activeBtn = document.getElementById(`blank-opt-${questionId}-${cleanStr(selectedValue)}`);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-slate-50', 'text-slate-800', 'border-slate-200');
+        activeBtn.classList.add('bg-pink-600', 'text-white', 'border-pink-600');
+      }
+
+      card.classList.remove('border-slate-100');
+      card.classList.add('border-pink-300', 'bg-pink-50/20');
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const answeredCount = Object.keys(answers).length;
+      document.getElementById('progressText').innerText = `${answeredCount} / ${totalQuestions} Answered`;
+      const percentage = (answeredCount / totalQuestions) * 100;
+      document.getElementById('progressBar').style.width = `${percentage}%`;
+    }
+
+    function speakText(text) {
+      if (!('speechSynthesis' in window)) {
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 0.85; // slightly slower for young learners
+      utterance.pitch = 1.05;
+      utterance.lang = 'en-US';
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function readQuestion(id, section) {
+      let q;
+      if (section === 'A') {
+        q = partAData.find(item => item.id === id);
+        if (q) {
+          const phrase = (q.context ? q.context + ". " : "") + q.question + ". The choices are: " + q.options.join(", ");
+          speakText(phrase);
+        }
+      } else {
+        q = partBData.find(item => item.id === id);
+        if (q) {
+          const phrase = q.question + ". Choose from: " + q.options.join(" or ");
+          speakText(phrase);
+        }
+      }
+    }
+
+    function startTimer() {
+      isTimerRunning = true;
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        if (timerSeconds > 0) {
+          timerSeconds--;
+          renderTimerDisplay();
+        } else {
+          clearInterval(timerInterval);
+          autoSubmitOnTimeUp();
+        }
+      }, 1000);
+      renderTimerDisplay();
+    }
+
+    function renderTimerDisplay() {
+      const mins = Math.floor(timerSeconds / 60);
+      const secs = timerSeconds % 60;
+      const formatted = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+      const el = document.getElementById('timerDisplay');
+      if (el) el.innerText = formatted;
+    }
+
+    function toggleTimer() {
+      const btn = document.getElementById('timerToggleBtn');
+      if (isTimerRunning) {
+        clearInterval(timerInterval);
+        isTimerRunning = false;
+        btn.innerText = "Resume";
+        btn.classList.add('bg-amber-100', 'text-amber-900');
+      } else {
+        startTimer();
+        btn.innerText = "Pause";
+        btn.classList.remove('bg-amber-100', 'text-amber-900');
+      }
+    }
+
+    function resetTimer() {
+      clearInterval(timerInterval);
+      timerSeconds = 60 * 60;
+      renderTimerDisplay();
+      startTimer();
+      document.getElementById('timerToggleBtn').innerText = "Pause";
+    }
+
+    function autoSubmitOnTimeUp() {
+      speakText("Time is up! Let's check your score.");
+      submitExam();
+    }
+
+    function submitExam() {
+      clearInterval(timerInterval);
+      const studentName = document.getElementById('studentName').value.trim() || 'Young Champion';
+      let score = 0;
+      let reviewHtml = '';
+
+      const allQuestions = [...partAData, ...partBData];
+
+      allQuestions.forEach(q => {
+        const userAns = answers[q.id];
+        const isCorrect = userAns && userAns.trim().toLowerCase() === q.correct.trim().toLowerCase();
+        if (isCorrect) score += 2;
+
+        reviewHtml += `
+          <div class="p-3.5 rounded-2xl border ${isCorrect ? 'bg-emerald-50/70 border-emerald-300' : 'bg-rose-50/70 border-rose-300'} text-sm">
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-bold text-slate-800">Question ${q.id}</span>
+              <span class="font-black text-xs px-2 py-0.5 rounded-full ${isCorrect ? 'bg-emerald-200 text-emerald-900' : 'bg-rose-200 text-rose-900'}">
+                ${isCorrect ? '+2 Marks (Correct)' : '0 Marks (Needs Practice)'}
+              </span>
+            </div>
+            <p class="font-semibold text-slate-700 mb-1.5">${q.question}</p>
+            <div class="flex flex-wrap items-center gap-3 text-xs">
+              <div><strong class="text-slate-500">Your Answer:</strong> <span class="${isCorrect ? 'text-emerald-700 font-bold' : 'text-rose-600 font-bold'}">${userAns || 'No Answer'}</span></div>
+              ${!isCorrect ? `<div><strong class="text-slate-500">Correct Answer:</strong> <span class="text-indigo-700 font-bold">${q.correct}</span></div>` : ''}
+            </div>
+          </div>
+        `;
+      });
+
+      const totalMarks = 40;
+      const percentage = Math.round((score / totalMarks) * 100);
+
+      // Stars & Feedback
+      let stars = '⭐⭐⭐';
+      let badge = '🏆';
+      let heading = 'Outstanding Job!';
+      let quote = 'Super reading and understanding! Keep up the brilliant work!';
+
+      if (percentage < 50) {
+        stars = '⭐';
+        badge = '🌱';
+        heading = 'Good Effort, Keep Practicing!';
+        quote = 'You did a great job trying! Practice these sentences every day with mom and dad.';
+      } else if (percentage < 80) {
+        stars = '⭐⭐';
+        badge = '🌟';
+        heading = 'Well Done!';
+        quote = 'Great progress! Review the few mistakes to get all 3 stars next time!';
+      }
+
+      document.getElementById('celebrationBadge').innerText = badge;
+      document.getElementById('resultHeading').innerText = heading;
+      document.getElementById('studentGreeting').innerText = `Report Card for ${studentName}`;
+      document.getElementById('finalScoreText').innerText = `${score} / ${totalMarks}`;
+      document.getElementById('finalPercentageText').innerText = `${percentage}%`;
+      document.getElementById('starsContainer').innerText = stars;
+      document.getElementById('feedbackQuote').innerText = quote;
+      document.getElementById('reviewBreakdown').innerHTML = reviewHtml;
+
+      // Open Modal
+      document.getElementById('resultModal').classList.remove('hidden');
+      speakText(`Congratulations ${studentName}! You scored ${score} out of 40 points.`);
+    }
+
+    function closeModal() {
+      document.getElementById('resultModal').classList.add('hidden');
+    }
+
+    function clearAllAnswers() {
+      answers = {};
+      renderPartA();
+      renderPartB();
+      updateProgress();
+    }
+
+    function scrollToQuestion(num) {
+      const el = document.getElementById(`q-card-${num}`);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Helper functions for safely generating IDs
+    function cleanStr(str) {
+      return String(str).replace(/[^a-zA-Z0-9]/g, '_');
+    }
+
+    function escapeSingleQuote(str) {
+      return String(str).replace(/'/g, "\\'");
+    }
+  </script>
+</body>
+</html>
